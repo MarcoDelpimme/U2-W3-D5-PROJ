@@ -101,9 +101,13 @@ window.onload = () => {
     addBtn.style.display = "none";
     const delBtn = document.createElement("button");
     delBtn.classList.add("btn", "btn-secondary");
+    delBtn.setAttribute = ("id", "btnDelete");
     delBtn.innerText = "Elimina prodotto";
     containerBtn.appendChild(delBtn);
 
+    delBtn.addEventListener("click", () => {
+      deleteProduct(productId);
+    });
     editProduct(productId);
   } else {
     const bntModify = document.getElementById("modifyBtn");
@@ -153,6 +157,14 @@ const deleteProduct = (productId) => {
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxYTEzZjRjNTllYzAwMTk5MGQ3MGQiLCJpYXQiOjE3MDkyODU2OTUsImV4cCI6MTcxMDQ5NTI5NX0.6FMg5Uyl493_R6qIjAbpt2ajhvbtuqBUTvj6EMZYkNs",
     },
   })
-    .then((response) => {})
-    .catch((err) => {});
+    .then((response) => {
+      if (response.ok) {
+        console.log("prodotto eliminato");
+      } else {
+        throw new Error("errore");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };

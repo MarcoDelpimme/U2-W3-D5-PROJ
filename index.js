@@ -33,9 +33,11 @@ function displayImages(productList) {
     const imgCard = document.createElement("img");
     imgCard.classList.add("bd-placeholder-img", "card-img-top");
     imgCard.src = product.imageUrl;
+    imgCard.style = "width:100%; height:500px; object-fit:cover";
 
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
+    cardBody.style = "min-height:350px";
 
     const titleCard = document.createElement("h5");
     titleCard.classList.add("card-title");
@@ -51,9 +53,11 @@ function displayImages(productList) {
     const containerBtn = document.createElement("div");
     containerBtn.classList.add("btn-group");
 
-    const btnView = document.createElement("btn");
-    btnView.classList.add("btn", "btn-sm", "btn-outline-success");
-    btnView.innerText = "BUY NOW";
+    const btnView = document.createElement("button");
+    btnView.classList.add("btn", "btn-sm", "btn-outline-info");
+    btnView.innerText = "View";
+    btnView.addEventListener("click", () => openDetailView(product._id));
+    containerBtn.appendChild(btnView);
 
     // BUTTON MODIFICA
     const btnEdit = document.createElement("button");
@@ -65,7 +69,7 @@ function displayImages(productList) {
 
     const textMuted = document.createElement("small");
     textMuted.classList.add("text-muted");
-    textMuted.innerText = product.price + "€";
+    textMuted.innerText = "Il prezzo è di " + product.price + "€";
 
     cardBody.appendChild(titleCard);
     cardBody.appendChild(descr);
@@ -82,3 +86,7 @@ function displayImages(productList) {
     card.appendChild(cardBody);
   });
 }
+
+const openDetailView = (productId) => {
+  window.location.href = `./detail.html?_id=${productId}`;
+};
