@@ -1,24 +1,3 @@
-fetch("https://striveschool-api.herokuapp.com/api/product/", {
-  method: "GET",
-  headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxYTEzZjRjNTllYzAwMTk5MGQ3MGQiLCJpYXQiOjE3MDkyODU2OTUsImV4cCI6MTcxMDQ5NTI5NX0.6FMg5Uyl493_R6qIjAbpt2ajhvbtuqBUTvj6EMZYkNs",
-  },
-})
-  .then((response) => {
-    console.log(response);
-
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error();
-    }
-  })
-  .then((productList) => {
-    console.log(productList);
-    displayImages(productList);
-  });
-
 function displayImages(productList) {
   console.log(productList);
   const containerCard = document.getElementById("container");
@@ -89,4 +68,27 @@ function displayImages(productList) {
 
 const openDetailView = (productId) => {
   window.location.href = `./detail.html?_id=${productId}`;
+};
+
+window.onload = () => {
+  fetch("https://striveschool-api.herokuapp.com/api/product/", {
+    method: "GET",
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxYTEzZjRjNTllYzAwMTk5MGQ3MGQiLCJpYXQiOjE3MDkyODU2OTUsImV4cCI6MTcxMDQ5NTI5NX0.6FMg5Uyl493_R6qIjAbpt2ajhvbtuqBUTvj6EMZYkNs",
+    },
+  })
+    .then((response) => {
+      console.log(response);
+
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error();
+      }
+    })
+    .then((productList) => {
+      console.log(productList);
+      displayImages(productList);
+    });
 };

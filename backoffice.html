@@ -43,7 +43,7 @@
         <div class="col-md-10 col-lg-7" id="container-text">
           <h1 class="mt-5 mb-3 display-5 d-inline-block">Backoffice</h1>
           <h5 class="d-inline-block" id="title-alt"></h5>
-          <form onsubmit="addProduct(event)" id="productForm">
+          <form id="productForm">
             <div class="mb-3">
               <label for="name" class="form-label">Nome Prodotto</label>
               <input type="text" class="form-control" id="name" placeholder="Inserisci il nome del Prodotto" required />
@@ -79,7 +79,7 @@
             </div>
 
             <div class="d-flex justify-content-between" id="containerBtn">
-              <button type="submit" class="btn btn-primary" id="addBtn">Inserisci</button>
+              <button type="submit" class="btn btn-primary" id="addBtn" onclick="addProduct(event)">Inserisci</button>
               <button id="resetBtn" type="reset" class="btn btn-danger" onclick="" style="line-height: 0">
                 Resetta campi
               </button>
@@ -94,9 +94,6 @@
               </button>
             </div>
           </form>
-        </div>
-        <div class="container" id="ulProduct">
-          <ul id="productUl"></ul>
         </div>
       </div>
     </div>
