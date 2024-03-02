@@ -7,7 +7,7 @@ function displayImages(productList) {
     column.classList.add("col-md-4");
 
     const card = document.createElement("div");
-    card.classList.add("card", "mb-4", "shadow-sm");
+    card.classList.add("card", "mb-4", "shadow-sm", "bg-dark", "text-white");
 
     const imgCard = document.createElement("img");
     imgCard.classList.add("bd-placeholder-img", "card-img-top");
@@ -47,7 +47,7 @@ function displayImages(productList) {
     // BUTTON MODIFICA
 
     const textMuted = document.createElement("small");
-    textMuted.classList.add("text-muted");
+    textMuted.classList.add("text-muted", "ms-2");
     textMuted.innerText = "Il prezzo è di " + product.price + "€";
 
     cardBody.appendChild(titleCard);

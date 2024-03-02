@@ -21,6 +21,7 @@ const addProduct = (e) => {
   e.preventDefault();
   const requestUser = window.confirm("sei sicuro di aggiungere il prodotto?");
   if (requestUser) {
+    window.alert("Prodotto aggiunto con successo ");
     const newProduct = {
       name: document.getElementById("name").value,
       description: document.getElementById("description").value,
@@ -59,6 +60,7 @@ const addProduct = (e) => {
 
 // AGGIUNGI PRODOTTO ALLA HOME END
 
+//REFORM DEL FORM START+ CHANGING MODE
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get("_id");
 
@@ -121,49 +123,80 @@ window.onload = () => {
     containerBtn.appendChild(delBtn);
 
     editProduct(productId);
-    delBtn.addEventListener("click", () => {
-      deleteProduct(productId);
+    //REFORM DEL FORM END + CHANGING MODE
+
+    //DELETE IELEMENT START
+    delBtn.addEventListener("click", (e) => {
+      const requestUserDelete = window.confirm("sei sicuro di voler eliminare il prodotto?");
+      e.preventDefault();
+      if (requestUserDelete) {
+        window.alert("Prodotto eliminato ");
+        deleteProduct(productId);
+        document.querySelector("form").reset();
+      } else {
+      }
     });
   } else {
     const bntModify = document.getElementById("modifyBtn");
     bntModify.style.display = "none";
   }
 };
+//DELETE IELEMENT END
 
 //MODIFICA PRODOTTO
 const modifyProduct = (e) => {
-  const modifyProduct = {
-    name: document.getElementById("name").value,
-    description: document.getElementById("description").value,
-    brand: document.getElementById("brand").value,
-    imageUrl: document.getElementById("urlImg").value,
-    price: document.getElementById("price").value,
-  };
+  e.preventDefault();
 
-  fetch(`https://striveschool-api.herokuapp.com/api/product/${productId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxYTEzZjRjNTllYzAwMTk5MGQ3MGQiLCJpYXQiOjE3MDkyODU2OTUsImV4cCI6MTcxMDQ5NTI5NX0.6FMg5Uyl493_R6qIjAbpt2ajhvbtuqBUTvj6EMZYkNs",
-    },
-    body: JSON.stringify(modifyProduct),
-  })
-    .then((response) => {
-      if (response.ok) {
-        console.log("Prodotto modificato con successo");
-      } else {
-        throw new Error("Errore durante la modifica del prodotto");
-      }
+  const requestUserModify = window.confirm("sei sicuro di voler modificare il prodotto?");
+  if (requestUserModify) {
+    window.alert("Prodotto modficato con successo ");
+    const modifyProduct = {
+      name: document.getElementById("name").value,
+      description: document.getElementById("description").value,
+      brand: document.getElementById("brand").value,
+      imageUrl: document.getElementById("urlImg").value,
+      price: document.getElementById("price").value,
+    };
+
+    fetch(`https://striveschool-api.herokuapp.com/api/product/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUxYTEzZjRjNTllYzAwMTk5MGQ3MGQiLCJpYXQiOjE3MDkyODU2OTUsImV4cCI6MTcxMDQ5NTI5NX0.6FMg5Uyl493_R6qIjAbpt2ajhvbtuqBUTvj6EMZYkNs",
+      },
+      body: JSON.stringify(modifyProduct),
     })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((response) => {
+        if (response.ok) {
+          console.log("Prodotto modificato con successo");
+        } else {
+          throw new Error("Errore durante la modifica del prodotto");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    document.querySelector("form").reset();
+  } else {
+  }
 };
+// MDOFICA PRODOTTO END
 
-// const bntModify = document.getElementById("modifyBtn");
-// bntModify.addEventListener("click", modifyProduct);
+// VALIDAZIONE FORM RESET
+const resetBtn = document.getElementById("resetBtn");
+resetBtn.addEventListener("click", function (e) {
+  const requestUserReset = window.confirm("sei sicuro di voler resettare il Form?");
+  if (requestUserReset) {
+    document.querySelector("form").reset();
+  } else {
+    e.preventDefault();
+  }
+});
+// VALIDAZIONE FORM RESET END
 
+// ELIMINAZIONE PRODOTTO
 const deleteProduct = (productId) => {
   fetch(`https://striveschool-api.herokuapp.com/api/product/${productId}`, {
     method: "DELETE",
@@ -183,3 +216,4 @@ const deleteProduct = (productId) => {
       console.log(error);
     });
 };
+// ELIMINAZIONE PRODOTTO END
